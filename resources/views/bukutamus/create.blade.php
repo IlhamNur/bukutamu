@@ -32,7 +32,7 @@
                     <td>Kategori</td>
                     <td>
                         @foreach ($kategoris as $kategori) 
-                            <input type="checkbox" id="{{$kategori->nama}}" name="kategori[]" value="{{$kategori->nomor}}" class="btn-check">
+                            <input type="checkbox" id="{{$kategori->nama}}" name="kategori[]" value="{{$kategori->nomor}}">
                             <label for="{{$kategori->nama}}"> {{$kategori->nama}}</label><br>
                         @endforeach
                     </td>
