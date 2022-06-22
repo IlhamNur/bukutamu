@@ -20,6 +20,7 @@
             <tr>
                 <th>Nomor</th>
                 <th>Nama</th>
+                <th>Foto</th>
                 <th>Kategori</th>
                 <th>Email</th>
                 <th>Waktu</th>
@@ -34,6 +35,11 @@
                     <th scope="row">{{ $bukutamus->firstItem() + $key }}</th>
                     <td>{{ $bukutamu->nama }}</td>
                     <td>
+                        @if ($bukutamu->foto)
+                            <img src="{{Storage::url($bukutamu->foto)}}" alt="foto" style="width: 200px; height:auto;">
+                        @endif
+                      </td>
+                    <td>
                         @foreach ($bukutamu->tamuKategoris as $tamuKategori) 
                             {{ $tamuKategori->Kategori->nama }}<br>
                         @endforeach
@@ -47,7 +53,7 @@
                             <form action="{{ route('bukutamus.destroy',$bukutamu->nomor) }}" method="Post">
                                 <a class="btn btn-warning m-r-1em" href="{{ route('bukutamus.edit',$bukutamu->nomor) }}">Ubah</a>
                                 @csrf
-
+                                
                                 @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Hapus</button>
                             </form>

@@ -4,6 +4,7 @@ use App\Models\Bukutamu;
 use App\Models\Kategori;
 use App\Models\TamuKategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class bukutamuCRUDController extends Controller
 {
@@ -38,13 +39,18 @@ class bukutamuCRUDController extends Controller
     {
         $request->validate([
         'nama' => 'required',
+        'foto' => 'required|file|image',
         'email' => 'required|email:dns',
         'waktu' => 'required|date_format:Y-m-d H:i:s',
         'kategori' => 'required',
         'komentar' => 'required'
         ]);
+
+        $path = Storage::disk('public')->putFile('foto', $request->file('foto'));
+
         $bukutamu = new Bukutamu;
         $bukutamu->nama = $request->nama;
+        $bukutamu->foto = $path;
         $bukutamu->email = $request->email;
         $bukutamu->waktu = $request->waktu;
         $bukutamu->komentar = $request->komentar;
@@ -95,9 +101,15 @@ class bukutamuCRUDController extends Controller
     {
         $request->validate([
         'nama' => 'required',
+        'foto' => 'required|file|image',
         'email' => 'required|email:dns',
         'komentar' => 'required'
         ]);
+
+        if($request->has('foto')){
+            $path = Storage::disk('public')->putFile('foto', $request->file('foto'));
+            $bukutamu->foto = $path;
+        }
 
         $bukutamu->nama = $request['nama'];
         $bukutamu->email = $request['email'];

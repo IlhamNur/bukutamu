@@ -14,7 +14,7 @@
             <div class="alert alert-success">{{ session('status') }}</div>
         @endif
 
-        <form action="{{ route('bukutamus.update',$bukutamu->nomor) }}" method="POST">
+        <form action="{{ route('bukutamus.update',$bukutamu->nomor) }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PUT')
             <table class='table table-hover table-responsive table-bordered'>
@@ -23,6 +23,13 @@
                     <td><input type='text' name='nama' value="{{ $bukutamu->nama }}" class='form-control' /></td>
                 </tr>
                 @error('nama')
+                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+                <tr>
+                    <td>Foto</td>
+                    <td><input type='file' name='foto' class='form-control' /></td>
+                </tr>
+                @error('foto')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
                 <tr>

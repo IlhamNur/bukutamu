@@ -10,7 +10,7 @@ class Bukutamu extends Model
     use HasFactory;
 
     protected $primaryKey = 'nomor';
-    protected $fillable = ['nama', 'email', 'komentar'];
+    protected $fillable = ['nama', 'email', 'komentar', 'foto'];
 
     public function tamuKategoris(){
         return $this->hasMany(TamuKategori::class, 'tamus_nomor', 'nomor');

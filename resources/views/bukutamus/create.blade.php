@@ -18,7 +18,7 @@
             date_default_timezone_set("Asia/Jakarta");
         @endphp
 
-        <form action="{{ route('bukutamus.store') }}" method="POST">
+        <form action="{{ route('bukutamus.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
             <table class='table table-hover table-responsive table-bordered'>
                 <tr>
@@ -26,6 +26,13 @@
                     <td><input type='text' name='nama' class='form-control' /></td>
                 </tr>
                 @error('nama')
+                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+                <tr>
+                    <td>Foto</td>
+                    <td><input type='file' name='foto' class='form-control' /></td>
+                </tr>
+                @error('foto')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
                 <tr>
