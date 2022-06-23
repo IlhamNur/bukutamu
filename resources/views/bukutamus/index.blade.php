@@ -50,13 +50,31 @@
 
                     @auth
                         <td>
-                            <form action="{{ route('bukutamus.destroy',$bukutamu->nomor) }}" method="Post">
-                                <a class="btn btn-warning m-r-1em" href="{{ route('bukutamus.edit',$bukutamu->nomor) }}">Ubah</a>
-                                @csrf
-                                
-                                @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
+                            <a class="btn btn-warning m-r-1em" href="{{ route('bukutamus.edit',$bukutamu->nomor) }}">Ubah</a>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal{{$bukutamu->nomor}}" class="btn btn-danger">Hapus</button>
+                            
+                            <div class="modal fade" id="deleteModal{{$bukutamu->nomor}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data Tamu</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form method="POST" action="{{ route('bukutamus.destroy',$bukutamu->nomor) }}">
+                                            @csrf
+
+                                            @method('DELETE')
+                                            <div class="modal-body" style="height:100px; display:flex; align-items:center; justify-content:center;">
+                                                <h5 class="text-center">Apakah anda yakin ingin menghapus data tamu ini?</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                                <button type="submit" class="btn btn-danger">Ya</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     @endauth
                 </tr>
